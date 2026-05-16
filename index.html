@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parlour Nail Parramatta — Luxury Nail Studio</title>
+<meta name="description" content="Parramatta's premier nail studio. Custom nail art, SNS, acrylics, shellac, waxing & lash extensions. Shop 4/181 Church St, Parramatta. Call 0426 425 789.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────── */
+:root{
+  --bg:#07050D;--bg2:#0E0B18;--surface:#15101F;--card:#1C1628;
+  --border:rgba(196,137,154,.14);--border2:rgba(201,169,110,.12);
+  --rose:#C4899A;--rose2:#E8B4C0;--rose3:rgba(196,137,154,.08);
+  --gold:#C9A96E;--gold2:#E5C98A;--gold3:rgba(201,169,110,.08);
+  --cream:#F5EAE5;--cream2:#D4C4BE;--muted:#7A6878;
+  --font-d:'Cormorant Garamond',serif;--font-b:'Plus Jakarta Sans',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);--ease2:cubic-bezier(.4,0,.2,1);
+  --radius:16px;--r-sm:10px;--r-lg:24px;
+}
+/* ─── RESET ──────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;cursor:none}
+body{background:var(--bg);color:var(--cream);font-family:var(--font-b);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font-b);cursor:none;border:none;background:none}
+ul{list-style:none}
+
+/* ─── CUSTOM CURSOR ───────────────────────────────────── */
+#cursor-outer{position:fixed;top:0;left:0;width:40px;height:40px;border:1.5px solid var(--rose);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,opacity .3s;mix-blend-mode:normal}
+#cursor-inner{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:10001;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+body:has(a:hover) #cursor-outer,
+body:has(button:hover) #cursor-outer{width:64px;height:64px;border-color:var(--gold)}
+
+/* ─── PRELOADER ───────────────────────────────────────── */
+#preloader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .8s var(--ease),visibility .8s}
+#preloader.hide{opacity:0;visibility:hidden}
+.pre-logo{font-family:var(--font-d);font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:.2em;color:var(--cream);opacity:0;animation:fadeUp .8s .3s var(--ease) forwards}
+.pre-sub{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:0;animation:fadeUp .8s .5s var(--ease) forwards}
+.pre-bar{width:200px;height:1px;background:var(--border);overflow:hidden;opacity:0;animation:fadeUp .6s .6s var(--ease) forwards}
+.pre-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--gold));width:0;animation:fill 1.8s .8s var(--ease2) forwards}
+@keyframes fill{to{width:100%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:24px 48px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,padding .4s,backdrop-filter .4s}
+nav.scrolled{background:rgba(7,5,13,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:16px 48px;border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-d);font-size:22px;font-weight:400;letter-spacing:.15em;color:var(--cream)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream2);transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:10px 24px;border:1px solid var(--rose);border-radius:100px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);transition:all .3s var(--ease)}
+.nav-cta:hover{background:var(--rose);color:var(--bg);transform:scale(1.03)}
+.nav-burger{display:none;flex-direction:column;gap:5px;width:24px}
+.nav-burger span{display:block;height:1px;background:var(--cream);transition:all .3s}
+
+/* ─── HERO ────────────────────────────────────────────── */
+#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-bg{
+  position:absolute;inset:0;z-index:1;
+  background:url('hero-bg.png') center 30%/cover no-repeat;
+  opacity:.45;
+  -webkit-mask-image:radial-gradient(ellipse 75% 90% at 70% 50%, black 30%, transparent 100%);
+  mask-image:radial-gradient(ellipse 75% 90% at 70% 50%, black 30%, transparent 100%);
+}
+@media(max-width:768px){
+  .hero-bg{
+    background-position:center 20%;
+    -webkit-mask-image:radial-gradient(ellipse 100% 70% at 50% 40%, black 30%, transparent 100%);
+    mask-image:radial-gradient(ellipse 100% 70% at 50% 40%, black 30%, transparent 100%);
+  }
+}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(196,137,154,.08) 0%,transparent 60%),linear-gradient(180deg,transparent 40%,var(--bg) 100%);z-index:2}
+.hero-content{position:relative;z-index:3;padding:0 48px;max-width:900px}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px;opacity:0;animation:fadeUp .8s 1.6s var(--ease) forwards}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--gold)}
+.hero-eyebrow span{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+.hero-title{font-family:var(--font-d);font-size:clamp(52px,9vw,120px);font-weight:300;line-height:.95;letter-spacing:-.01em;margin-bottom:32px}
+.hero-title .line{overflow:hidden;display:block}
+.hero-title .word{display:inline-block;opacity:0;transform:translateY(110%);animation:slideUp .9s var(--ease) forwards}
+.hero-title .w1{animation-delay:1.8s}
+.hero-title .w2{animation-delay:1.95s;font-style:italic;color:var(--rose2)}
+.hero-title .w3{animation-delay:2.1s}
+.hero-title .w4{animation-delay:2.25s;color:var(--gold)}
+@keyframes slideUp{to{opacity:1;transform:none}}
+.hero-sub{font-size:15px;color:var(--cream2);max-width:440px;line-height:1.7;opacity:0;animation:fadeUp .8s 2.5s var(--ease) forwards;margin-bottom:40px}
+.hero-actions{display:flex;gap:16px;align-items:center;opacity:0;animation:fadeUp .8s 2.7s var(--ease) forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:linear-gradient(135deg,var(--rose),var(--gold));border-radius:100px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);font-weight:600;transition:transform .3s var(--ease),box-shadow .3s;box-shadow:0 0 40px rgba(196,137,154,.2)}
+.btn-primary:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 8px 60px rgba(196,137,154,.35)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream2);transition:color .3s}
+.btn-secondary:hover{color:var(--gold)}
+.btn-secondary svg{transition:transform .3s}
+.btn-secondary:hover svg{transform:translateX(4px)}
+.hero-scroll{position:absolute;bottom:40px;left:48px;z-index:3;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .8s 3s var(--ease) forwards}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--rose));animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
+.scroll-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
+
+/* ─── MARQUEE ─────────────────────────────────────────── */
+.marquee-wrap{overflow:hidden;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2)}
+.marquee-track{display:flex;gap:60px;white-space:nowrap;animation:marquee 28s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{font-family:var(--font-d);font-size:18px;font-weight:300;font-style:italic;color:var(--muted);display:flex;align-items:center;gap:20px;flex-shrink:0}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes marquee-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.marquee-track.rev{animation:marquee-rev 32s linear infinite}
+.marquee-track.rev:hover{animation-play-state:paused}
+.marquee-wrap.alt{background:var(--bg);border-top:none}
+.marquee-wrap.alt .marquee-item{color:rgba(201,169,110,.4)}
+.marquee-wrap.alt .marquee-dot{background:var(--rose)}
+
+/* ─── SECTION COMMONS ─────────────────────────────────── */
+section{padding:120px 48px}
+.section-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold)}
+.section-eyebrow span{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+.section-title{font-family:var(--font-d);font-size:clamp(36px,5vw,64px);font-weight:300;line-height:1.05;letter-spacing:-.01em}
+.section-title em{font-style:italic;color:var(--rose2)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+
+/* ─── ABOUT ───────────────────────────────────────────── */
+#about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;background:var(--bg)}
+.about-img-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r-lg);position:relative;z-index:1}
+.about-img-frame{position:absolute;top:24px;left:24px;right:-24px;bottom:-24px;border:1px solid var(--border2);border-radius:var(--r-lg);z-index:0}
+.about-badge{position:absolute;bottom:-24px;right:-24px;background:linear-gradient(135deg,var(--rose),var(--gold));border-radius:var(--r-lg);padding:24px 28px;z-index:2;text-align:center}
+.badge-num{font-family:var(--font-d);font-size:48px;font-weight:300;color:var(--bg);line-height:1}
+.badge-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--bg);margin-top:4px;font-weight:600}
+.about-text .section-title{margin-bottom:28px}
+.about-body{color:var(--cream2);line-height:1.8;margin-bottom:20px;font-size:15px}
+.about-body strong{color:var(--cream);font-weight:500}
+.about-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.pill{padding:8px 18px;border:1px solid var(--border);border-radius:100px;font-size:12px;letter-spacing:.1em;color:var(--cream2);transition:all .3s}
+.pill:hover{border-color:var(--rose);color:var(--rose);background:var(--rose3)}
+
+/* ─── STATS ───────────────────────────────────────────── */
+#stats{padding:80px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+.stat-num{font-family:var(--font-d);font-size:clamp(48px,6vw,80px);font-weight:300;line-height:1;background:linear-gradient(135deg,var(--rose2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+/* ─── SERVICES ────────────────────────────────────────── */
+#services{background:var(--bg);padding-bottom:140px}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;gap:40px;flex-wrap:wrap}
+.services-header .section-title{max-width:500px}
+.tab-buttons{display:flex;gap:4px;background:var(--surface);padding:4px;border-radius:100px;border:1px solid var(--border)}
+.tab-btn{padding:10px 24px;border-radius:100px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:all .3s;font-family:var(--font-b)}
+.tab-btn.active{background:linear-gradient(135deg,var(--rose),var(--gold));color:var(--bg);font-weight:600}
+.tab-btn:hover:not(.active){color:var(--cream2)}
+.tab-panel{display:none}
+.tab-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;animation:fadeUp .5s var(--ease)}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:transform .4s var(--ease),border-color .3s,box-shadow .4s;transform-style:preserve-3d;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--rose3),var(--gold3));opacity:0;transition:opacity .4s;border-radius:var(--radius)}
+.service-card:hover{transform:translateY(-6px) rotateX(2deg) rotateY(-1deg);border-color:rgba(196,137,154,.3);box-shadow:0 20px 60px rgba(196,137,154,.1)}
+.service-card:hover::before{opacity:1}
+.service-icon{width:44px;height:44px;background:var(--card);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;border:1px solid var(--border);transition:border-color .3s}
+.service-card:hover .service-icon{border-color:var(--rose)}
+.service-name{font-family:var(--font-d);font-size:22px;font-weight:400;margin-bottom:8px;color:var(--cream)}
+.service-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.service-items{display:flex;flex-direction:column;gap:6px}
+.service-item{font-size:13px;color:var(--cream2);display:flex;align-items:center;gap:8px}
+.service-item::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.service-note{margin-top:20px;padding:12px 16px;background:var(--card);border-radius:var(--r-sm);font-size:12px;color:var(--gold);letter-spacing:.05em;display:flex;align-items:center;gap:8px}
+
+/* ─── GALLERY ─────────────────────────────────────────── */
+#gallery{background:var(--bg2);padding:120px 0}
+.gallery-header{padding:0 48px;margin-bottom:56px}
+.gallery-scroll-wrap{overflow:hidden;cursor:grab;position:relative}
+.gallery-scroll-wrap:active{cursor:grabbing}
+.gallery-track{display:flex;gap:20px;padding:0 48px;transition:transform .1s linear}
+.gallery-item{flex-shrink:0;width:340px;height:460px;border-radius:var(--radius);overflow:hidden;position:relative;border:1px solid var(--border)}
+.gallery-item:nth-child(even){margin-top:40px}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,5,13,.8) 0%,transparent 50%);opacity:0;transition:opacity .4s}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-label{position:absolute;bottom:20px;left:20px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:0;transform:translateY(8px);transition:all .4s var(--ease)}
+.gallery-item:hover .gallery-label{opacity:1;transform:none}
+.gallery-socials{padding:0 48px;margin-top:48px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.gallery-social-link{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream2);border-bottom:1px solid var(--border);padding-bottom:6px;transition:color .3s,border-color .3s}
+.gallery-social-link:hover{color:var(--gold);border-color:var(--gold)}
+.gallery-social-divider{color:var(--border);font-size:20px;line-height:1}
+
+/* ─── TESTIMONIALS ────────────────────────────────────── */
+#testimonials{background:var(--bg);padding:120px 0}
+.testimonials-header{padding:0 48px;margin-bottom:56px}
+.testi-scroll-wrap{overflow:hidden;cursor:grab;position:relative;user-select:none;-webkit-user-select:none}
+.testi-scroll-wrap:active{cursor:grabbing}
+.testi-track{display:flex;gap:20px;padding:0 48px;will-change:transform}
+.testi-card{flex-shrink:0;width:195px;min-height:520px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 18px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .3s,box-shadow .3s}
+.testi-card:hover{border-color:rgba(196,137,154,.3);box-shadow:0 12px 40px rgba(196,137,154,.08)}
+.testi-stars{display:flex;gap:3px;margin-bottom:20px;color:var(--gold);font-size:13px;letter-spacing:2px}
+.testi-text{font-family:var(--font-d);font-size:14.5px;font-weight:300;font-style:italic;line-height:1.65;color:var(--cream);flex:1;position:relative;padding-top:8px}
+.testi-text::before{content:'\201C';font-size:48px;color:var(--rose);line-height:0;vertical-align:-.45em;margin-right:3px;font-style:normal;opacity:.7}
+.testi-author{display:flex;align-items:center;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;color:var(--bg);flex-shrink:0}
+.testi-name{font-size:13px;font-weight:500;color:var(--cream)}
+.testi-meta{font-size:11px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:5px}
+.testi-meta svg{color:var(--gold)}
+.testi-nav,.testi-btn,.testi-dots,.testi-dot{display:none}
+
+/* ─── HOURS & LOCATION ────────────────────────────────── */
+#hours{background:var(--bg2);border-top:1px solid var(--border)}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.hours-left{padding:80px 48px;border-right:1px solid var(--border)}
+.hours-right{padding:80px 48px}
+.hours-table{margin-top:36px;display:flex;flex-direction:column;gap:0}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.hours-row:last-child{border-bottom:none}
+.hours-day{font-size:14px;color:var(--cream2)}
+.hours-time{font-size:14px;color:var(--cream);font-weight:500}
+.hours-time.special{color:var(--gold)}
+.location-info{margin-top:36px;display:flex;flex-direction:column;gap:20px}
+.loc-item{display:flex;gap:16px;align-items:flex-start}
+.loc-icon{width:40px;height:40px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0}
+.loc-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.loc-value{font-size:15px;color:var(--cream)}
+.loc-value a{color:var(--rose);transition:color .3s}
+.loc-value a:hover{color:var(--gold)}
+.student-badge{margin-top:32px;padding:20px 24px;background:linear-gradient(135deg,rgba(196,137,154,.08),rgba(201,169,110,.06));border:1px solid var(--border2);border-radius:var(--radius);display:flex;align-items:center;gap:16px}
+.student-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--border2);border-radius:12px;color:var(--gold);flex-shrink:0}
+.student-text strong{display:block;color:var(--gold);font-size:15px;margin-bottom:2px}
+.student-text span{font-size:13px;color:var(--muted)}
+
+/* ─── CTA ─────────────────────────────────────────────── */
+#cta{padding:120px 48px;text-align:center;background:var(--bg);position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(196,137,154,.07) 0%,transparent 65%);pointer-events:none}
+.cta-title{font-family:var(--font-d);font-size:clamp(40px,7vw,90px);font-weight:300;line-height:1.05;margin-bottom:32px;position:relative;z-index:1}
+.cta-title em{font-style:italic;color:var(--rose2)}
+.cta-sub{font-size:15px;color:var(--cream2);max-width:480px;margin:0 auto 48px;line-height:1.7;position:relative;z-index:1}
+.cta-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:1}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 48px 40px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+.footer-brand .nav-logo{font-size:24px;margin-bottom:16px;display:block}
+.footer-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:260px;margin-bottom:24px}
+.footer-socials{display:flex;gap:12px}
+.social-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .3s}
+.social-btn:hover{border-color:var(--rose);color:var(--rose);transform:translateY(-3px)}
+.footer-col h4{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.footer-col ul{display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:13px;color:var(--muted);transition:color .3s}
+.footer-col ul li a:hover{color:var(--cream2)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--muted)}
+.footer-credit{font-size:12px;color:var(--muted)}
+.footer-credit a{color:var(--rose);transition:color .3s}
+.footer-credit a:hover{color:var(--gold)}
+
+/* ─── MOBILE MENU ─────────────────────────────────────── */
+.mobile-menu{position:fixed;inset:0;z-index:490;background:rgba(7,5,13,.97);backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px;opacity:0;visibility:hidden;transition:all .4s var(--ease)}
+.mobile-menu.open{opacity:1;visibility:visible}
+.mobile-menu a{font-family:var(--font-d);font-size:36px;font-weight:300;color:var(--cream2);letter-spacing:.05em;transition:color .3s}
+.mobile-menu a:hover{color:var(--gold)}
+.close-btn{position:absolute;top:24px;right:24px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;color:var(--muted);font-size:20px;transition:all .3s}
+.close-btn:hover{border-color:var(--rose);color:var(--rose)}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1024px){
+  .footer-top{grid-template-columns:1fr 1fr}
+  #about{grid-template-columns:1fr;gap:48px}
+  .about-img-wrap{max-width:480px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  nav{padding:20px 24px}
+  nav.scrolled{padding:14px 24px}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  section{padding:80px 24px}
+  #stats{padding:60px 24px}
+  .hero-content{padding:0 24px}
+  .hero-scroll{left:24px}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .hours-grid{grid-template-columns:1fr}
+  .hours-left{border-right:none;border-bottom:1px solid var(--border);padding:60px 24px}
+  .hours-right{padding:60px 24px}
+  .testi-card{width:calc(85vw)}
+  .services-header{flex-direction:column;align-items:flex-start}
+  footer{padding:48px 24px 32px}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  #gallery{padding:80px 0}
+  .gallery-header{padding:0 24px}
+  .gallery-insta{padding:0 24px}
+  #cta{padding:80px 24px}
+  .testi-dots{margin-top:24px}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:24px}
+  .tab-buttons{flex-wrap:wrap;border-radius:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor-outer"></div>
+<div id="cursor-inner"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo">PARLOUR NAIL</div>
+  <div class="pre-sub">Parramatta · Est. 2020</div>
+  <div class="pre-bar"><div class="pre-fill"></div></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="toggleMenu()">×</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#hours" onclick="toggleMenu()">Contact</a>
+  <a href="tel:0426425789" class="btn-primary" style="margin-top:16px;padding:16px 36px">Book Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Parlour <span>Nail</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#hours">Contact</a>
+    <a href="tel:0426425789" class="nav-cta">Book Now</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span>Parramatta's Premier Nail Studio</span></div>
+    <h1 class="hero-title">
+      <span class="line"><span class="word w1">Nails</span> <span class="word w2">that</span></span>
+      <span class="line"><span class="word w3">demand</span> <span class="word w4">attention.</span></span>
+    </h1>
+    <p class="hero-sub">Custom nail art crafted with obsessive precision. SNS, acrylics, shellac, waxing & lash extensions — all under one roof in Parramatta.</p>
+    <div class="hero-actions">
+      <a href="tel:0426425789" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.22 2 2 0 013.5 0h3a2 2 0 012 1.72c.13.96.35 1.9.68 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.18 6.18l.88-.88a2 2 0 012.11-.45c.91.33 1.85.55 2.81.68A2 2 0 0122 15.5v1.42z"/></svg>
+        Book Appointment
+      </a>
+      <a href="#services" class="btn-secondary">
+        View Services
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Custom Nail Art</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>SNS & Acrylics</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Shellac Manicure</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Waxing Services</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Lash Extensions</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>5 Years in Parramatta</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Student Discount</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Custom Nail Art</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>SNS & Acrylics</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Shellac Manicure</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Waxing Services</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Lash Extensions</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>5 Years in Parramatta</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Student Discount</span>
+  </div>
+</div>
+
+<!-- MARQUEE REVERSE -->
+<div class="marquee-wrap alt">
+  <div class="marquee-track rev">
+    <span class="marquee-item"><span class="marquee-dot"></span>Parramatta's Finest</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>5 Star Experience</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Walk-ins Welcome</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Est. 2020</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Instagram-Worthy Nails</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Custom Art Specialists</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>TikTok Famous</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Parramatta's Finest</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>5 Star Experience</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Walk-ins Welcome</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Est. 2020</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Instagram-Worthy Nails</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Custom Art Specialists</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>TikTok Famous</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap reveal">
+    <img class="about-img" src="about-hero.png" alt="Parlour Nail — French tip manicure" loading="lazy">
+    <div class="about-img-frame"></div>
+    <div class="about-badge">
+      <div class="badge-num">5</div>
+      <div class="badge-label">Years in<br>Parramatta</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-eyebrow reveal"><span>Our Story</span></div>
+    <h2 class="section-title reveal reveal-delay-1">More than nails —<br><em>it's wearable art.</em></h2>
+    <p class="about-body reveal reveal-delay-2">Parlour Nail was born from a lifelong dream — to open a <strong>world-class nail studio in the heart of Parramatta</strong>. After more than two decades in the beauty industry, our founder brought that vision to life in August 2020.</p>
+    <p class="about-body reveal reveal-delay-2">We believe every nail is a blank canvas. Our technicians approach every set with the <strong>patience and precision of a fine artist</strong> — because that's exactly what nail design demands. Highly trained, genuinely passionate, and incredibly friendly.</p>
+    <p class="about-body reveal reveal-delay-3">From intricate custom art to classic french tips, from full acrylic sets to express shellac — we do it all with care and expertise that keeps our clients coming back.</p>
+    <div class="about-pills reveal reveal-delay-3">
+      <span class="pill">Custom Nail Art</span>
+      <span class="pill">SNS Specialists</span>
+      <span class="pill">Acrylic Experts</span>
+      <span class="pill">Lash Extensions</span>
+      <span class="pill">Full Body Waxing</span>
+      <span class="pill">Student Discount</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="reveal">
+      <div class="stat-num" data-count="5">0</div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="stat-num" data-count="2000">0</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="stat-num" data-count="50">0</div>
+      <div class="stat-label">Nail Art Styles</div>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div class="stat-num" data-suffix="★">4.9</div>
+      <div class="stat-label">Google Rating</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-eyebrow reveal"><span>What We Offer</span></div>
+      <h2 class="section-title reveal reveal-delay-1">Services crafted<br><em>for every client.</em></h2>
+    </div>
+    <div class="tab-buttons reveal reveal-delay-2">
+      <button class="tab-btn active" data-tab="nails">Nails</button>
+      <button class="tab-btn" data-tab="waxing">Waxing</button>
+      <button class="tab-btn" data-tab="lashes">Lashes</button>
+    </div>
+  </div>
+
+  <!-- NAILS TAB -->
+  <div class="tab-panel active" id="tab-nails">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="service-name">Polish</div>
+      <div class="service-desc">Classic nail care with premium polish finishes</div>
+      <div class="service-items">
+        <span class="service-item">Manicure</span>
+        <span class="service-item">Pedicure</span>
+        <span class="service-item">Manicure + Pedicure Combo</span>
+        <span class="service-item">Buff, Shape & Polish</span>
+        <span class="service-item">Manicure with Plastic Bag</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div class="service-name">Shellac</div>
+      <div class="service-desc">Long-lasting gel polish with a mirror-perfect finish</div>
+      <div class="service-items">
+        <span class="service-item">Shellac Manicure</span>
+        <span class="service-item">Shellac Pedicure</span>
+        <span class="service-item">Buff, Shape + Shellac</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="service-name">Acrylic</div>
+      <div class="service-desc">Sculpted acrylic sets — from classic to dramatic lengths</div>
+      <div class="service-items">
+        <span class="service-item">Full Set</span>
+        <span class="service-item">Infill</span>
+        <span class="service-item">Full Set with Shellac</span>
+        <span class="service-item">Infill with Shellac</span>
+        <span class="service-item">Ombre Full Set</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="service-name">SNS</div>
+      <div class="service-desc">Signature dipping powder — strong, healthy &amp; stunning</div>
+      <div class="service-items">
+        <span class="service-item">SNS Natural Overlay</span>
+        <span class="service-item">SNS Full Set</span>
+        <span class="service-item">SNS French</span>
+        <span class="service-item">SNS with Manicure</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="service-name">Extras</div>
+      <div class="service-desc">Finishing touches &amp; add-ons to perfect your look</div>
+      <div class="service-items">
+        <span class="service-item">French Tip</span>
+        <span class="service-item">Design on 2 Nails</span>
+        <span class="service-item">SNS / Gel Removal</span>
+        <span class="service-item">Hand & Foot Massage</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+  </div>
+
+  <!-- WAXING TAB -->
+  <div class="tab-panel" id="tab-waxing">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="service-name">Face</div>
+      <div class="service-desc">Precise facial waxing for smooth, clean results</div>
+      <div class="service-items">
+        <span class="service-item">Eyebrows</span>
+        <span class="service-item">Lip</span>
+        <span class="service-item">Chin</span>
+        <span class="service-item">Sides</span>
+        <span class="service-item">Full Face</span>
+        <span class="service-item">Nose</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div class="service-name">Body</div>
+      <div class="service-desc">Full body waxing for silky smooth skin everywhere</div>
+      <div class="service-items">
+        <span class="service-item">Underarms</span>
+        <span class="service-item">Half Arms / Full Arms</span>
+        <span class="service-item">Half Legs / Full Legs</span>
+        <span class="service-item">Back</span>
+        <span class="service-item">Chest & Stomach</span>
+        <span class="service-item">Shoulders / Ears</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="service-name">Intimate</div>
+      <div class="service-desc">Discreet and professional intimate waxing services</div>
+      <div class="service-items">
+        <span class="service-item">Bikini Line</span>
+        <span class="service-item">Brazilian</span>
+        <span class="service-item">Speedo Line</span>
+        <span class="service-item">Stomach Line</span>
+        <span class="service-item">Full Stomach</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      </div>
+      <div class="service-name">Full Body</div>
+      <div class="service-desc">Complete head-to-toe waxing package</div>
+      <div class="service-items">
+        <span class="service-item">Full Body Package</span>
+        <span class="service-item">Custom combinations available</span>
+        <span class="service-item">Ask us about bundle pricing</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for bundle pricing
+      </div>
+    </div>
+  </div>
+
+  <!-- LASHES TAB -->
+  <div class="tab-panel" id="tab-lashes">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="service-name">Extensions</div>
+      <div class="service-desc">Luscious lash extensions for a natural to dramatic look</div>
+      <div class="service-items">
+        <span class="service-item">Full Lash Extension Set</span>
+        <span class="service-item">Refill / Infill</span>
+        <span class="service-item">Removal</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+      </div>
+      <div class="service-name">Lash Lift</div>
+      <div class="service-desc">Lift and curl your natural lashes — no extensions needed</div>
+      <div class="service-items">
+        <span class="service-item">Lash Lift Treatment</span>
+        <span class="service-item">Lasts 6–8 weeks</span>
+        <span class="service-item">Pair with lash tint for best results</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="service-name">Tinting</div>
+      <div class="service-desc">Define and darken with professional-grade tint</div>
+      <div class="service-items">
+        <span class="service-item">Eyebrow Tint</span>
+        <span class="service-item">Lash Tint</span>
+        <span class="service-item">Eyebrow + Lash Tint Combo</span>
+      </div>
+      <div class="service-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Call for latest pricing
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header">
+    <div class="section-eyebrow reveal"><span>Our Work</span></div>
+    <h2 class="section-title reveal reveal-delay-1">Crafted with <em>obsessive detail.</em></h2>
+  </div>
+  <div class="gallery-scroll-wrap" id="galleryWrap">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-item">
+        <img src="275337758_641801727078630_6889574128181051649_n.jpg" alt="Custom nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="542507007_808300705094521_6813843481053827589_n.jpg" alt="3D nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">3D Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="547815088_18103925857598087_8525613329331368396_n.jpg" alt="Acrylic full set" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Acrylic Full Set</span>
+      </div>
+      <div class="gallery-item">
+        <img src="553060225_1200235638565328_4057047601830495703_n.jpg" alt="Custom design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="558058311_3036216143248136_763088295537882175_n.jpg" alt="Ombre acrylics" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Ombre Acrylics</span>
+      </div>
+      <div class="gallery-item">
+        <img src="558635172_1297930028800057_6784734730851534008_n.jpg" alt="SNS French" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">SNS French</span>
+      </div>
+      <div class="gallery-item">
+        <img src="565091395_1372369514514627_373477207224757992_n.jpg" alt="Nail art detail" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Art Detail</span>
+      </div>
+      <div class="gallery-item">
+        <img src="572668967_18110679070598087_8801249617153105077_n.jpg" alt="French tip art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">French Tip Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="587654619_18112669369598087_5962191993422171670_n.jpg" alt="Sculpted nails" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Sculpted Set</span>
+      </div>
+      <div class="gallery-item">
+        <img src="549608064_18104116684598087_7641170798942485429_n.jpg" alt="Nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="554304337_18105545785598087_2878216916835806210_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="558456638_1527106051806105_6713623099656797691_n.jpg" alt="Custom nails" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Nails</span>
+      </div>
+      <div class="gallery-item">
+        <img src="565423693_18109026721598087_2529086768855070688_n.jpg" alt="Acrylic nails" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Acrylic Set</span>
+      </div>
+      <div class="gallery-item">
+        <img src="568129778_18109028194598087_4200322875441078515_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="571981661_18109783585598087_6726695080405276249_n.jpg" alt="Nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="571992226_18110590825598087_3956821838813017778_n.jpg" alt="Shellac" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Shellac</span>
+      </div>
+      <div class="gallery-item">
+        <img src="587802676_18114993007598087_7521983861535125164_n.jpg" alt="Nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="588649805_18112867837598087_8838167955948185954_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="602830042_18114992524598087_6960269829138128923_n.jpg" alt="Custom nails" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Nails</span>
+      </div>
+      <div class="gallery-item">
+        <img src="604426707_18114992794598087_7329234048614863156_n.jpg" alt="Nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="605933029_18114992932598087_7675572969991821165_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="609400670_18115836103598087_361523614899828729_n.jpg" alt="Sculpted nails" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Sculpted Set</span>
+      </div>
+      <div class="gallery-item">
+        <img src="610129987_18115837456598087_5263777794263573097_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="610497481_18115836607598087_9147981845978806669_n.jpg" alt="Custom art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="611278128_18116170720598087_5418626242840824353_n.jpg" alt="Nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="612984422_18116697655598087_1476785672038683051_n.jpg" alt="Custom design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="617728658_18117188464598087_740725471929492310_n.jpg" alt="Nail art" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Art</span>
+      </div>
+      <div class="gallery-item">
+        <img src="619205236_18117195307598087_7681616328455680886_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+      <div class="gallery-item">
+        <img src="624949727_18118818880598087_233221761527779331_n.jpg" alt="Latest work" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Latest Work</span>
+      </div>
+      <div class="gallery-item">
+        <img src="542987746_18103500640598087_2540658561368332263_n.jpg" alt="Custom nails" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Custom Nails</span>
+      </div>
+      <div class="gallery-item">
+        <img src="553759213_17867681358450830_1490782662422316850_n.jpg" alt="Nail design" loading="lazy">
+        <div class="gallery-overlay"></div>
+        <span class="gallery-label">Nail Design</span>
+      </div>
+    </div>
+  </div>
+  <div class="gallery-socials reveal">
+    <a href="https://www.instagram.com/parlour_nail/" target="_blank" rel="noopener" class="gallery-social-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Follow @parlour_nail on Instagram
+    </a>
+    <span class="gallery-social-divider">·</span>
+    <a href="https://www.tiktok.com/@parlournail" target="_blank" rel="noopener" class="gallery-social-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+      Watch @parlournail on TikTok
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <div>
+      <div class="section-eyebrow reveal"><span>Client Love</span></div>
+      <h2 class="section-title reveal reveal-delay-1">What our clients <em>say.</em></h2>
+    </div>
+  </div>
+  <div class="testi-scroll-wrap" id="testiWrap">
+    <div class="testi-track" id="testiTrack">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Been coming to Parlour Nail for three years now and it's truly unmatched anywhere in Parramatta. My SNS never lifts and the nail art always turns out exactly as I imagined. The team genuinely love what they do and it shows.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MT</div>
+          <div>
+            <div class="testi-name">Mia T.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Had my wedding nails done here and I literally cried happy tears when I saw them. The ombre acrylics were absolutely perfect — every single guest asked where I got them. Cannot recommend Parlour Nail enough.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SK</div>
+          <div>
+            <div class="testi-name">Sarah K.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">True nail artists. I bring in the most intricate inspo pics and they deliver every single time without question. The shellac lasts over 4 weeks without chipping. The quality here is on a completely different level.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">LN</div>
+          <div>
+            <div class="testi-name">Linh N.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Came in for lash extensions and a full SNS set and left feeling like a completely new person. The lashes look so natural and the SNS is still going strong after 5 weeks. This is my forever nail salon — no question.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JW</div>
+          <div>
+            <div class="testi-name">Jess W.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The custom nail art here is genuinely at a gallery level. I always leave obsessed with my nails. The student discount makes it even better — it's an absolute steal for this quality. Highly recommend to anyone in Parramatta.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PS</div>
+          <div>
+            <div class="testi-name">Priya S.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The waxing here is quick, efficient and so much less painful than anywhere else I've tried. Combined with a shellac mani it's the perfect self-care afternoon. Salon is spotlessly clean and the team make you feel so welcome.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AC</div>
+          <div>
+            <div class="testi-name">Amy C.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I drove from Blacktown just to come here and I'd do it again without hesitation. I wanted a Japanese 3D floral design and the result was better than any inspo pic I showed them. Absolutely obsessed.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RM</div>
+          <div>
+            <div class="testi-name">Rachel M.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Best gel in Western Sydney, hands down. I've been burned by other salons that chip within a week but mine lasted the full 3 weeks without a single crack. The team are so lovely and the salon smells amazing.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">TN</div>
+          <div>
+            <div class="testi-name">Tammy N.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">My mum and I came in together for a mother-daughter mani and it was honestly one of our favourite days ever. The staff made us feel so special from start to finish. Already booked our next visit!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">CB</div>
+          <div>
+            <div class="testi-name">Charlotte B.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">As someone very picky about nail shapes, I was amazed they got my coffin shape perfect on the first try. No back and forth, no compromising — just perfect nails every single visit. This is the only salon I'll ever go to.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ZL</div>
+          <div>
+            <div class="testi-name">Zoe L.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Got my lash extensions done here before my engagement photos and they were still full and fluttery two weeks later. Since then I've been back for SNS and it's the same level of perfection every single time.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">DR</div>
+          <div>
+            <div class="testi-name">Daniela R.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The student discount is real and so appreciated! Got a gorgeous shellac with detailed nail art for such a reasonable price — quality that would cost double anywhere else. I tell every single uni friend about Parlour Nail.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">IC</div>
+          <div>
+            <div class="testi-name">Isabelle C.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I'm very particular about nail salons — Parlour Nail is the only one that truly listens. They understood my reference photos perfectly on the first try. The SNS powder colour range here is absolutely unreal.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AT</div>
+          <div>
+            <div class="testi-name">Anh T.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Came in for a simple pedicure and ended up booking a full acrylic set too because the vibe was just so good. The salon is gorgeous inside and the team are genuinely lovely people. My new favourite self-care spot.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MH</div>
+          <div>
+            <div class="testi-name">Madison H.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Three words: consistently. excellent. nails. I've been coming every three weeks for nearly two years and not once have I been disappointed. These guys are true professionals through and through.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">TO</div>
+          <div>
+            <div class="testi-name">Tara O.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Highly recommend the gel-x nails here. So comfortable and they last forever. I work with my hands every day and they held up perfectly for 4 full weeks without a single chip or lift. Incredible work.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SP</div>
+          <div>
+            <div class="testi-name">Sophie P.</div>
+            <div class="testi-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Review
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & LOCATION -->
+<section id="hours" style="padding:0">
+  <div class="hours-grid">
+    <div class="hours-left">
+      <div class="section-eyebrow reveal"><span>Opening Hours</span></div>
+      <h2 class="section-title reveal reveal-delay-1">Visit <em>us.</em></h2>
+      <div class="hours-table reveal reveal-delay-2">
+        <div class="hours-row">
+          <span class="hours-day">Monday – Wednesday</span>
+          <span class="hours-time">9:00am – 5:30pm</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Thursday</span>
+          <span class="hours-time" style="color:var(--gold)">9:00am – 7:00pm</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Friday</span>
+          <span class="hours-time">9:00am – 5:00pm</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time">9:30am – 5:00pm</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time special">By Appointment Only</span>
+        </div>
+      </div>
+      <div class="student-badge reveal reveal-delay-3">
+        <div class="student-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="student-text">
+          <strong>10% Student Discount</strong>
+          <span>Show your valid student ID at any visit</span>
+        </div>
+      </div>
+    </div>
+    <div class="hours-right">
+      <div class="section-eyebrow reveal"><span>Find Us</span></div>
+      <h2 class="section-title reveal reveal-delay-1">In the heart of <em>Parramatta.</em></h2>
+      <div class="location-info reveal reveal-delay-2">
+        <div class="loc-item">
+          <div class="loc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="loc-label">Address</div>
+            <div class="loc-value">Shop 4 / 181 Church Street<br>Parramatta NSW 2150</div>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.22 2 2 0 013.5 0h3a2 2 0 012 1.72c.13.96.35 1.9.68 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.18 6.18l.88-.88a2 2 0 012.11-.45c.91.33 1.85.55 2.81.68A2 2 0 0122 15.5v1.42z"/></svg>
+          </div>
+          <div>
+            <div class="loc-label">Phone / WhatsApp</div>
+            <div class="loc-value"><a href="tel:0426425789">0426 425 789</a></div>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div>
+            <div class="loc-label">Instagram</div>
+            <div class="loc-value"><a href="https://instagram.com/parlour_nail" target="_blank">@parlour_nail</a></div>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+          </div>
+          <div>
+            <div class="loc-label">TikTok</div>
+            <div class="loc-value"><a href="https://www.tiktok.com/@parlournail" target="_blank" rel="noopener">@parlournail</a></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:36px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);height:240px" class="reveal reveal-delay-3">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.3!2d151.0029!3d-33.8155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a32fa8b75f75%3A0x5017d681632e960!2sShop%204%2F181%20Church%20St%2C%20Parramatta%20NSW%202150!5e0!3m2!1sen!2sau!4v1"
+          width="100%" height="240" style="border:0;filter:invert(90%) hue-rotate(180deg)"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Parlour Nail location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="reveal">
+    <h2 class="cta-title">Ready for your<br><em>dream nails?</em></h2>
+    <p class="cta-sub">Call or WhatsApp us to book your appointment. Walk-ins welcome when available — but we recommend booking ahead.</p>
+    <div class="cta-actions">
+      <a href="tel:0426425789" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.22 2 2 0 013.5 0h3a2 2 0 012 1.72c.13.96.35 1.9.68 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.18 6.18l.88-.88a2 2 0 012.11-.45c.91.33 1.85.55 2.81.68A2 2 0 0122 15.5v1.42z"/></svg>
+        Call 0426 425 789
+      </a>
+      <a href="https://wa.me/61426425789" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#25D366,#128C7E)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="nav-logo">Parlour <span>Nail</span></span>
+      <p class="footer-desc">Parramatta's premier nail studio. Custom nail art, waxing and lash extensions crafted with precision and passion since 2020.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/parlour_nail/" target="_blank" class="social-btn" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@parlournail" target="_blank" class="social-btn" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+        </a>
+        <a href="https://maps.app.goo.gl/parlournail" target="_blank" class="social-btn" aria-label="Google Maps">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Shellac Manicure</a></li>
+        <li><a href="#services">SNS Nails</a></li>
+        <li><a href="#services">Acrylic Sets</a></li>
+        <li><a href="#services">Custom Nail Art</a></li>
+        <li><a href="#services">Waxing</a></li>
+        <li><a href="#services">Lash Extensions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#hours">Hours</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:0426425789">0426 425 789</a></li>
+        <li><a href="https://wa.me/61426425789">WhatsApp Us</a></li>
+        <li><a href="https://www.instagram.com/parlour_nail/">@parlour_nail</a></li>
+        <li><a href="#hours">Shop 4/181 Church St</a></li>
+        <li><a href="#hours">Parramatta NSW 2150</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Parlour Nail Parramatta. All rights reserved.</span>
+    <span class="footer-credit">Website by <a href="#">Studio NR</a></span>
+  </div>
+</footer>
+
+<script>
+/* ─── CURSOR ─────────────────────────────────────── */
+const outer=document.getElementById('cursor-outer');
+const inner=document.getElementById('cursor-inner');
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;inner.style.left=mx+'px';inner.style.top=my+'px'});
+(function moveCursor(){ox+=(mx-ox)*.12;oy+=(my-oy)*.12;outer.style.left=ox+'px';outer.style.top=oy+'px';requestAnimationFrame(moveCursor)})();
+
+/* ─── PRELOADER ──────────────────────────────────── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('preloader').classList.add('hide')},2400);
+});
+
+/* ─── NAV SCROLL ─────────────────────────────────── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* ─── MOBILE MENU ────────────────────────────────── */
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+
+/* ─── HERO CANVAS ────────────────────────────────── */
+(function(){
+  const canvas=document.getElementById('hero-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const colors=['rgba(196,137,154,','rgba(201,169,110,','rgba(232,180,192,','rgba(229,201,138,'];
+  class P{
+    constructor(){this.reset()}
+    reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*2+.5;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.a=Math.random()*.5+.1;this.c=colors[Math.floor(Math.random()*colors.length)];this.pulse=Math.random()*Math.PI*2}
+    update(){this.x+=this.vx;this.y+=this.vy;this.pulse+=.02;const a=this.a*(Math.sin(this.pulse)*.3+.7);ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.c+a+')';ctx.fill();if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}
+  }
+  for(let i=0;i<120;i++)particles.push(new P());
+  function loop(){ctx.clearRect(0,0,W,H);particles.forEach(p=>p.update());requestAnimationFrame(loop)}
+  loop();
+})();
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+const revealEls=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}});
+},{threshold:.12});
+revealEls.forEach(el=>ro.observe(el));
+
+/* ─── COUNTER ────────────────────────────────────── */
+const counters=document.querySelectorAll('[data-count]');
+const co=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target,target=+el.dataset.count,duration=1800,start=performance.now();
+      (function tick(now){
+        const p=Math.min((now-start)/duration,1),ease=1-Math.pow(1-p,3);
+        el.textContent=Math.round(ease*target)+(target>=1000?'+':'');
+        if(p<1)requestAnimationFrame(tick);
+      })(start);
+      co.unobserve(el);
+    }
+  });
+},{threshold:.3});
+counters.forEach(c=>co.observe(c));
+
+/* ─── SERVICE TABS ───────────────────────────────── */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-'+this.dataset.tab).classList.add('active');
+  });
+});
+
+/* ─── 3D CARD TILT ───────────────────────────────── */
+document.querySelectorAll('.service-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+    const rx=(y/r.height-.5)*10,ry=(x/r.width-.5)*-10;
+    card.style.transform=`perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform=''});
+});
+
+/* ─── GALLERY DRAG SCROLL ────────────────────────── */
+(function(){
+  const wrap=document.getElementById('galleryWrap');
+  const track=document.getElementById('galleryTrack');
+  let pos=0,vel=0,isDragging=false,autoDir=1;
+  let startX=0,startPos=0,lastX=0,lastT=0;
+
+  function getMax(){return Math.max(0,track.scrollWidth-wrap.offsetWidth);}
+  function clamp(v){return Math.max(0,Math.min(getMax(),v));}
+
+  function tick(){
+    if(!isDragging){
+      if(Math.abs(vel)>0.3){
+        pos=clamp(pos+vel);
+        vel*=0.88;
+        if(pos<=0||pos>=getMax()) vel*=-0.2;
+      } else {
+        vel=0;
+        pos=clamp(pos+autoDir*0.35);
+        if(pos>=getMax()) autoDir=-1;
+        if(pos<=0) autoDir=1;
+      }
+    }
+    track.style.transform='translateX(-'+pos+'px)';
+    requestAnimationFrame(tick);
+  }
+
+  /* mouse */
+  wrap.addEventListener('mousedown',function(e){
+    isDragging=true; vel=0;
+    startX=e.clientX; startPos=pos;
+    lastX=e.clientX; lastT=Date.now();
+    wrap.style.cursor='grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!isDragging) return;
+    const now=Date.now(), dt=Math.max(1,now-lastT);
+    vel=(lastX-e.clientX)/dt*14;
+    lastX=e.clientX; lastT=now;
+    pos=clamp(startPos-(e.clientX-startX));
+  });
+  document.addEventListener('mouseup',function(){
+    if(!isDragging) return;
+    isDragging=false;
+    wrap.style.cursor='grab';
+  });
+
+  /* touch */
+  wrap.addEventListener('touchstart',function(e){
+    isDragging=true; vel=0;
+    startX=e.touches[0].clientX; startPos=pos;
+    lastX=e.touches[0].clientX; lastT=Date.now();
+  },{passive:true});
+  wrap.addEventListener('touchmove',function(e){
+    if(!isDragging) return;
+    const now=Date.now(), dt=Math.max(1,now-lastT);
+    vel=(lastX-e.touches[0].clientX)/dt*14;
+    lastX=e.touches[0].clientX; lastT=now;
+    pos=clamp(startPos-(e.touches[0].clientX-startX));
+  },{passive:true});
+  wrap.addEventListener('touchend',function(){ isDragging=false; });
+
+  requestAnimationFrame(tick);
+})();
+
+/* ─── TESTIMONIALS GLIDE ─────────────────────────── */
+(function(){
+  const wrap=document.getElementById('testiWrap');
+  const track=document.getElementById('testiTrack');
+  if(!wrap||!track) return;
+  /* duplicate cards for seamless infinite loop */
+  Array.from(track.children).forEach(function(c){track.appendChild(c.cloneNode(true));});
+  let pos=0,vel=0,isDragging=false,startX=0,startPos=0,lastX=0,lastT=0;
+  const SPEED=0.45; /* auto-glide px per frame */
+  function half(){return track.scrollWidth/2;}
+  function display(){var h=half();return((pos%h)+h)%h;}
+  function tick(){
+    if(!isDragging){
+      if(Math.abs(vel)>0.08) vel*=0.92; else vel=0;
+      pos+=vel+SPEED;
+    }
+    track.style.transform='translateX(-'+display()+'px)';
+    requestAnimationFrame(tick);
+  }
+  wrap.addEventListener('mousedown',function(e){
+    isDragging=true;vel=0;startX=e.clientX;startPos=pos;lastX=e.clientX;lastT=Date.now();
+    wrap.style.cursor='grabbing';e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!isDragging) return;
+    var now=Date.now(),dt=Math.max(1,now-lastT);
+    vel=(lastX-e.clientX)/dt*16;lastX=e.clientX;lastT=now;
+    pos=startPos+(startX-e.clientX);
+  });
+  document.addEventListener('mouseup',function(){
+    if(!isDragging) return;isDragging=false;wrap.style.cursor='grab';
+  });
+  wrap.addEventListener('touchstart',function(e){
+    isDragging=true;vel=0;startX=e.touches[0].clientX;startPos=pos;
+    lastX=e.touches[0].clientX;lastT=Date.now();
+  },{passive:true});
+  wrap.addEventListener('touchmove',function(e){
+    if(!isDragging) return;
+    var now=Date.now(),dt=Math.max(1,now-lastT);
+    vel=(lastX-e.touches[0].clientX)/dt*16;lastX=e.touches[0].clientX;lastT=now;
+    pos=startPos+(startX-e.touches[0].clientX);
+  },{passive:true});
+  wrap.addEventListener('touchend',function(){isDragging=false;});
+  requestAnimationFrame(tick);
+})();
+
+/* ─── SMOOTH ANCHOR SCROLL ───────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
